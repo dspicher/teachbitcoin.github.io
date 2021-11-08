@@ -9,29 +9,118 @@
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/simple.css">
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/xcode.css">
+		<link rel="stylesheet" href="lib/css/default.css">
 		<!-- Theme override for teachbitcoin -->
 		<link rel="stylesheet" href="css/teachbitcoin.css">
 		<!-- Google Font Roboto -->
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
 
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
+   <section class = "box">
+    <div class = "title">
+      Motivating Schnorr:<span class = "title weight"> ZKP of a discrete log</span>
+    </div>
 
+					<!-- 2 column container -->
+					<!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+					<div class = "multi_text_box_container" style = "padding: 50px 0 0 0;">
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box math_normal"
+								 style = "width: 45%; font-size: 27px; margin: 60px 0 0 0">
+							<ul class = "math_normal" style = "margin: 20; padding: 0px;">
+								<li>Assume Peggy wants to prove possession of a secret \(a\) to victor (\(P=pG\), generator \(G\))</li>
+								<ul class = "math_normal">
+                  <li>without disclosing any information about it (ZKP)</li>
+                </ul>
+								<li class = "math_normal">Peggy chooses a random \(k\), sends <span class="inline_code">\(R=kG\)</span> to Victor</li>
+                <li class = "math_normal">Victor sends back a random challenge <span class="inline_code">\(e\)</span>
+                <li class = "math_normal">Peggy sends back <span class="inline_code">\(s=k+e*a\)</span>
+                <li class = "math_normal">Victor checks whether <span class="inline_code">\(sG=R+eP\)</span>
+								<br>
+							</ul>
+						</div>
+						<div class = "text_box"
+								 style = "width: 45%; font-size: 27px; margin: 60px 0 0 0">
+                 <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+                   <li>Why is this sound? (intuitively)</li>
+                   <ul class = "math_normal">
+                     <li>If a forger hadn't committed to \(R\), he could choose random \(s\) and compute \(R=sG-eP\)</li>
+                   </ul>
+                   <li class = "math_normal">Pre-commitment forces him to either solve the discrete log of either</li>
+                   <ul class = "math_normal">
+                     <li>\(R+eP\)</li>
+                     <li>\(P\)</li>
+                   </ul>
+                   <li>A rigorous argument reduces DLOG to Schnorr ID</li>
+                   <br>
+                 </ul>
+						</div>
+					</div><!-- End of 2 column container -->
+				</section>
+  <!-- *********** END: Pedersen Commitment *********** -->
+
+  <section class = "box">
+    <div class = "title">
+      Non-interactive <span class = "title weight">Schnorr signatures</span>
+    </div>
+
+					<!-- 2 column container -->
+					<!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box math_normal"
+								 style = "width: 90%; font-size: 27px; margin: 60px 0 0 30px">
+							<ul class = "math_normal" style = "margin: 20; padding: 0px;">
+								<li>As we have seen, the temporal order of \(R\rightarrow e\) is crucial</li>
+                <li>The Fiat-Shamir constructs a signature scheme by using a random oracle to ensure this</li>
+								<ul class = "math_normal">
+                  <li>cryptographic hash function \(H\)</li>
+                </ul>
+                <li class = "math_normal">Non-random challenge \(e=H(R\mid\mid m)\)
+                  <ul class = "math_normal">
+                    <li>message \(m\)</li>
+                  </ul>
+                <li class = "math_normal">\(s=k+e*a\), signature \((R,s)\)
+                <li class = "math_normal">Verification equation \(sG\stackrel{?}{=}R+eP\)
+                <li class = "math_normal">BIP340 also hashes \(P\) to avoid some attacks that create a valid signature for \(P'\)
+								<br>
+							</ul>
+						</div>
+				</section>
+        <section class = "box">
+          <div class = "title">
+            <span class = "title weight">Why not Schnorr?</span>
+          </div>
+          <div class = "text_box math_normal"
+               style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
+            <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+              <li>Schnorr is in a sense the simplest possible EC signature algorithm</li>
+              <li>Patented in 1991</li>
+              <li>Patent expired in 2008, but there were almost no standards, etc.</li>
+              <li>ECDSA is what you get when you awkwardly try to work around Schnorr</li>
+            </ul>
+          </div>
+          </section>
         <!-- *********** Begin: Pedersenn Commitment *********** -->
         <section class = "box">
           <div class = "title">
-              <span class = "title weight">Pedersen Commitment</span>
+            Motivating ECDSA: <span class = "title weight">Pedersen Commitment</span>
           </div>
 
           <!-- Derivation Graphic -->
-          <img src="images/ecdsa/commitment0.svg" class = "image" style = "z-index: -1;">
-          <img src="images/ecdsa/commitment1.svg" class = "fragment image" style = "z-index: -1;">
-          <img src="images/ecdsa/commitment2.svg" class = "fragment image" style = "z-index: -1;">
+          <img src="images/ecdsa/commitment2.svg" class = "image" style = "z-index: -1;">
 
           <!-- 2 column container -->
           <!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
@@ -65,7 +154,7 @@
                 <li style = "font-weight: bold;">Broken commitment scheme:</li>
                 <ul>
                   <li>Generator <span class="inline_code">e</span> of point <span class="inline_code">H</span> is known.</li>
-                  <li>Value <span class="inline_code">u</span> can be modified, commitment remains identical.</li>
+                  <li>Value <span class="inline_code">u</span> can be modified, commitment remains identical. (How?)</li>
                 </ul>
 
             </div>
@@ -82,8 +171,7 @@
           </div>
 
           <!-- Derivation Graphic -->
-          <img src="images/ecdsa/ecdsa0.svg" class = "image" style = "z-index: -1;">
-          <img src="images/ecdsa/ecdsa1.svg" class = "fragment image" style = "z-index: -1;">
+          <img src="images/ecdsa/ecdsa1.svg" class = "image" style = "z-index: -1;">
 
           <!-- 2 column container -->
           <!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
@@ -116,10 +204,12 @@
                 </ul>
                 <hr style = "height: 5px; visibility: hidden;">
 
-                <li style = "font-weight: bold;">ECDSA Validation:</li>
+                <li style = "font-weight: bold;">ECDSA Verification:</li>
                 <ul>
                   <li><span class="inline_code">z</span>, <span class="inline_code">r_x</span>, <span class="inline_code">s</span> and public key <span class="inline_code">P</span> required to validate signature.</li>
+                  <li>Blackboard: verification equation</li>
                 </ul>
+                
 
             </div>
 
@@ -205,14 +295,14 @@
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-					// { src: 'plugin/math/math.js', async: true }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/math/math.js', async: true }
 				],
 
-				// math: {
-				// 	mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-				// 	config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-				// },
+				math: {
+					mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+				},
 
 				previewLinks: false,
 
@@ -238,7 +328,7 @@
 				minScale: 0.2,
 				maxScale: 1.5
 			});
-			Reveal.configure({ slideNumber: false });
+			Reveal.configure({ slideNumber: true });
 		</script>
 	</body>
 </html>

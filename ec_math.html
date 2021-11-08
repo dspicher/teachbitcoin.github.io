@@ -163,7 +163,7 @@
 						<div class = "text_box"
 								 style = "width: 45%; font-size: 23px; margin: 60px 0 0 0">
 							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
-								<li style = "font-weight: 600;">The Infinity Point:</li>
+								<li style = "font-weight: 600;">The Point at Infinity:</li>
 								<li>The (Inf/Inf) point is defined as a point which is infinitely far away in the direction of the y-axis.
 								</li>
 								<br>
@@ -171,6 +171,7 @@
 								<br>
 								<li>\( P_{1}(x_{1},y_{1}) + (Inf/Inf) = P_{1}(x_{1},y_{1}) \)</li>
 								<li>\( P_{1}(x_{1},y_{1}) + P_{2}(x_{1},-y_{1}) = (Inf/Inf) \)</li>
+								<li style = "font-weight: 600;">The infinity point is the group identity element</li>
 							</ul>
 						</div>
 					</div><!-- End of 2 column container -->
@@ -211,12 +212,8 @@
 								<ul>
 									<li>Consider Line L&#39;(P1,P2).</li>
 									<li>Converges to tangent of P1, as P1 = P2.</li>
-									<li>Computation of P3 = P1 + P1:</li>
 									<ul style="font-size: 16px">
-										<li>\(P_{3}(x_{3},y_{3}) = 2 \cdot P_{1}(x_{1},y_{1})\)</li>
-										<li>\(s =\frac{(3x_{1}^{2}+a)}{2y_{1}}\)</li>
-										<li>\(x_{3} =s^{2}-2x_{1}\)</li>
-										<li>\(y_{3} =s(x_{1}-x_{3})-y_{1}\)</li>
+										<li>One intuitive reason for restrictions on \(a, b\) to avoid singular points</li>
 									</ul>
 								</ul>
 								<hr style = "height: 1px; visibility: hidden;">
@@ -277,6 +274,43 @@
 										<li><span class="inline_code">(P1 + P2) + P3 = P1 + (P2 + P3)</span></li>
 										<li>(Associativity can be observed in example)</li>
 									</ul>
+									<li>Rather fragile property, reflection necessary!</li>
+								</ul>
+								<hr style = "height: 1px; visibility: hidden;">
+
+							</ul>
+						</div>
+					</div><!-- End of 2 column container -->
+
+				</section><section class = "box">
+
+					<div class = "title">
+						<span class = "title weight">Stirring the pot</span>
+					</div>
+
+
+					<div class = "multi_text_box_container" style = "padding: 24px 0 0 0;">
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box"
+								 style = "width: 50%; font-size: 24px; margin: 40px 0 0 0">
+							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+
+								<li style = "font-weight: 600;">So far we established the groups structure of elliptic curves</li>
+								<ul>
+									<li>Point addition</li>
+									<li>Identity element</li>
+									<li>etc.</li>
+								</ul>
+								<hr style = "height: 1px; visibility: hidden;">
+
+								<li style = "font-weight: 600;">ECs are defined over an underlying field</li>
+								<ul>
+									<li>\(y^{2}=ax^{3}+bx+c\)</li>
+									<li>So far it was always \(\mathbb{Q}\), but any field does the trick</li>
+									<ul>
+										<li>The magic of abstract algebra</li>
+									</ul>
+									<li> \(\Rightarrow\)Final step: ECs over finite fields</li>
 								</ul>
 								<hr style = "height: 1px; visibility: hidden;">
 
@@ -285,6 +319,7 @@
 					</div><!-- End of 2 column container -->
 
 				</section>
+				
 				<!-- *********** END: EC over reals: Associativity of Addition *********** -->
 
 				<!-- *********** END: Chapter EC Reals  *********** -->
@@ -512,7 +547,7 @@
 									<li><span class="inline_code" style="font-weight:600;">\( P=G+G+G...G+G+G = k \circ G \)</span></li>
 									<ul>
 										<li>Given <span class="inline_code" style="font-weight:600;">\(P\)</span>, solve for  <span class="inline_code" style="font-weight:600;">\(k\)</span></li>
-										<li>Number of Points in Group: <a href=https://en.wikipedia.org/wiki/Schoof%27s_algorithm#The_algorithm>Schoof's Algorithm</a>
+										<li>Number of Points in Group: \(\approx p\) (<a href=https://en.wikipedia.org/wiki/Schoof%27s_algorithm#The_algorithm>Schoof's Algorithm</a>)
 										<hr style = "height:1px; visibility:hidden;">
 									</ul>
 										<div class = "fragment">

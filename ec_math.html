@@ -351,7 +351,7 @@
 								<li style = "font-weight: 600;">Point on elliptic curve over \( \mathbb{F}_{p} \)</li>
 								<ul>
 									<li>Point coordinates fulfill following equation:
-									<li>\( y^{2}=ax^{3}+bx^{2}+c\:(mod\:P)\)</li>
+									<li>\( y^{2}=ax^{3}+bx^{2}+c\:(mod\:p)\)</li>
 								</ul>
 								<hr style = "height:5px; visibility:hidden;">
 
@@ -449,7 +449,13 @@
 
 				</section>
 				<!-- *********** END: EC Addition over Finite Fields *********** -->
+				<section class = "box">
 
+					<div class = "title">
+						<span class = "title weight">Geometric intuition</span> for EC-Point Addition over \( \mathbb{F}_{p} \)
+					</div>
+					<img src="images/point-addition-mod-p.png">
+				</section>
 				<!-- *********** BEGIN: EC Cyclic Groups (I) *********** -->
 				<section class = "box">
 
@@ -472,6 +478,7 @@
 								<ul>
 									<li>\(P(x,y)+P(x,-y)=(Inf/Inf)\)</li>
 									<li>Same relationship as over \(\mathbb{R}\)</li>
+									<li>Blackboard: Prove that both points are on the curve</li>
 
 								</ul>
 								<hr style = "height:3px; visibility:hidden;">
@@ -480,7 +487,6 @@
 									<ul>
 										<li>\(1 \circ G\)</li>
 										<li>\(2 \circ G\)</li>
-										<li>\(3 \circ G\)</li>
 										<li>\(...\)</li>
 										<li>\( \lvert \mathbb{G} \rvert \circ G = (Inf,Inf)  \)</li>
 										<li>(Proof of cyclic behaviour omitted)</li>
@@ -547,7 +553,8 @@
 									<li><span class="inline_code" style="font-weight:600;">\( P=G+G+G...G+G+G = k \circ G \)</span></li>
 									<ul>
 										<li>Given <span class="inline_code" style="font-weight:600;">\(P\)</span>, solve for  <span class="inline_code" style="font-weight:600;">\(k\)</span></li>
-										<li>Number of Points in Group: \(\approx p\) (<a href=https://en.wikipedia.org/wiki/Schoof%27s_algorithm#The_algorithm>Schoof's Algorithm</a>)
+										<li>Number of Points in Group: \(\approx p\) (<a href=https://en.wikipedia.org/wiki/Schoof%27s_algorithm#The_algorithm>Schoof's Algorithm</a>)</li>
+										<li>EC multiplication is more like a black-box-operation than modulo-exponentiation over \(\mathbb{F}_p\)</li>
 										<hr style = "height:1px; visibility:hidden;">
 									</ul>
 										<div class = "fragment">
@@ -556,7 +563,6 @@
 												<ul>
 													<li>160bit (group order) / 80bit (security)</li>
 													<li>256bit (group order) / 128bit (security)</li>
-													<li>512bit (group order) / 256bit (security)</li>
 
 												</ul>
 												<hr style = "height:1px; visibility:hidden;">
@@ -565,8 +571,8 @@
 												<ul>
 													<li>1040bit (group order) / 80bit (security)</li>
 													<li>3072bit (group order) / 128bit (security)</li>
-													<li>15360bit (group order) / 256bit (security)</li>
 												</ul>
+												<li style="font-weight:600;">This is a conjecture! (\(\mathcal{P} \stackrel{?}{=} \mathcal{NP}\))</li>
 
 											</ul>
 										<div>
@@ -631,7 +637,7 @@
 							<div class = "substep">
 								<li class = "math_normal" style = "font-weight: 600; margin: 30px 0 20px 0;">Bitcoin private & public keys:</li>
 								<li class = "math_normal weight">\(P = k \circ G\)</li>
-								<li class = "math_normal" style = "font-style:italic;">(Private key scalar \(s\) is chosen, secp256k1-point \(P\) is the public key)</li>
+								<li class = "math_normal" style = "font-style:italic;">(Private key scalar \(k\) is chosen, secp256k1-point \(P\) is the public key)</li>
 							</div>
 					</div>
 
@@ -641,6 +647,29 @@
 							</li>
 						</ul>
 					</div>
+
+				</section><section class = "box">
+
+					<div class = "title">
+						Why <span class = "title weight">secp256k1</span>
+					</div>
+
+					<div class = "multi_text_box_container" style = "padding: 24px 0 0 0;">
+						<!-- 45% text & bulletpoint -->
+						<div class = "text_box"
+								 style = "width: 50%; font-size: 24px; margin: 40px 0 0 0">
+							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
+
+								<li style = "font-weight: 600;">secp256k1 has some special properties that speed up some operations</li>
+								<ul>
+									<li>\(a=0\)</li>
+								</ul>
+								<li style = "font-weight: 600;">Prime order also chosen in a somewhat predictable manner</li>
+								<li style = "font-weight: 600;">However, secp256k1 was virtually unused before Bitcoin</li>
+								<hr style = "height: 1px; visibility: hidden;">
+
+							</ul>
+						</div>
 
 				</section>
 				<!-- *********** END: BTC Private/Public Keys *********** -->

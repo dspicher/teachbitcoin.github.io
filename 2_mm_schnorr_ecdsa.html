@@ -29,6 +29,25 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+        <section class = "box">
+          <div class = "title">
+            Turning EC math into <span class = "title weight">Digital Signature schemes</span>
+          </div>
+          <div class = "text_box math_normal"
+               style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
+            <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+              <li>High-level goals: requires private key to construct, only public key to verify</li>
+              <li>Private key is the discrete log of the public key</li>
+              <li>Signature verification: Does some equation hold?</li>
+              <ul>
+              <li>Signer balances the equation on the field level</li>
+              <li>Verifier verifies on the group level (multiply everything with \(G\))</li>
+            </ul>
+            <li>Helpful mental picture: Repeated addition of \(G\) throws you around randomly in \(\mathbb{F}_p\times\mathbb{F}_p\)</li>
+            <li>Next up: Schnorr, ECDSA</li>
+            </ul>
+          </div>
+          </section>
    <section class = "box">
     <div class = "title">
       Motivating Schnorr:<span class = "title weight"> ZKP of a discrete log</span>
@@ -41,14 +60,14 @@
 						<div class = "text_box math_normal"
 								 style = "width: 45%; font-size: 27px; margin: 60px 0 0 0">
 							<ul class = "math_normal" style = "margin: 20; padding: 0px;">
-								<li>Assume Peggy wants to prove possession of a secret \(a\) to victor (\(P=pG\), generator \(G\))</li>
+								<li>Assume Peggy wants to prove possession of a secret \(a\) to victor (\(P=aG\), generator \(G\))</li>
 								<ul class = "math_normal">
                   <li>without disclosing any information about it (ZKP)</li>
                 </ul>
-								<li class = "math_normal">Peggy chooses a random \(k\), sends <span class="inline_code">\(R=kG\)</span> to Victor</li>
-                <li class = "math_normal">Victor sends back a random challenge <span class="inline_code">\(e\)</span>
-                <li class = "math_normal">Peggy sends back <span class="inline_code">\(s=k+e*a\)</span>
-                <li class = "math_normal">Victor checks whether <span class="inline_code">\(sG=R+eP\)</span>
+								<li class = "math_normal">Peggy chooses a random \(k\), sends \(R=kG\) to Victor</li>
+                <li class = "math_normal">Victor sends back a random challenge \(e\)
+                <li class = "math_normal">Peggy sends back \(s=k+e*a\)
+                <li class = "math_normal">Victor checks whether \(sG=R+eP\)
 								<br>
 							</ul>
 						</div>
@@ -58,7 +77,7 @@
                    <li>Why is this sound? (intuitively)</li>
                    <ul class = "math_normal">
                      <li>If a forger hadn't committed to \(R\), he could choose random \(s\) and compute \(R=sG-eP\)</li>
-                   </ul>
+                   
                    <li class = "math_normal">Pre-commitment forces him to either solve the discrete log of either</li>
                    <ul class = "math_normal">
                      <li>\(R+eP\)</li>
@@ -66,6 +85,7 @@
                    </ul>
                    <li>A rigorous argument reduces DLOG to Schnorr ID</li>
                    <br>
+                 </ul>
                  </ul>
 						</div>
 					</div><!-- End of 2 column container -->
@@ -84,7 +104,7 @@
 								 style = "width: 90%; font-size: 27px; margin: 60px 0 0 30px">
 							<ul class = "math_normal" style = "margin: 20; padding: 0px;">
 								<li>As we have seen, the temporal order of \(R\rightarrow e\) is crucial</li>
-                <li>The Fiat-Shamir constructs a signature scheme by using a random oracle to ensure this</li>
+                <li>Fiat-Shamir heuristic: construct a signature scheme by using a random oracle to ensure this</li>
 								<ul class = "math_normal">
                   <li>cryptographic hash function \(H\)</li>
                 </ul>
@@ -92,7 +112,8 @@
                   <ul class = "math_normal">
                     <li>message \(m\)</li>
                   </ul>
-                <li class = "math_normal">\(s=k+e*a\), signature \((R,s)\)
+                <li class = "math_normal">\(s=k+e*a\)
+                  <ul><li>signature \((R,s)\)</li></ul>
                 <li class = "math_normal">Verification equation \(sG\stackrel{?}{=}R+eP\)
                 <li class = "math_normal">BIP340 also hashes \(P\) to avoid some attacks that create a valid signature for \(P'\)
 								<br>
@@ -101,15 +122,17 @@
 				</section>
         <section class = "box">
           <div class = "title">
-            <span class = "title weight">Why not Schnorr?</span>
+            Bitcoin: <span class = "title weight">Why not Schnorr?</span>
           </div>
           <div class = "text_box math_normal"
                style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
             <ul class = "math_normal" style = "margin: 20; padding: 0px;">
-              <li>Schnorr is in a sense the simplest possible EC signature algorithm</li>
               <li>Patented in 1991</li>
               <li>Patent expired in 2008, but there were almost no standards, etc.</li>
               <li>ECDSA is what you get when you awkwardly try to work around Schnorr</li>
+              <ul>
+              <li>Schnorr is in a sense the simplest possible EC signature algorithm</li>
+            </ul>
             </ul>
           </div>
           </section>
@@ -276,6 +299,26 @@
 
 
 
+        <section class = "box">
+          <div class = "title">
+            <span class = "title weight">Other Schnorr goodies</span>
+          </div>
+          <div class = "text_box math_normal"
+               style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
+            <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+              <li>Smaller and simpler fixed-length 64-byte encoding</li>
+              <ul>
+                <li>Implicity even y-coordinate public keys only (every public key has two private keys)</li>
+              </ul>
+              <li>The fact that the signature is an EC point let's us do fancy things on it</li>
+              <ul>
+              <li>Batch verification</li>
+              <li>Adaptor sigantures</li>
+            </ul>
+            <li>Bonus: Private key leak through nonce reuse</li>
+            </ul>
+          </div>
+          </section>
 
 
 

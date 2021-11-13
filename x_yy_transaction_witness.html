@@ -21,6 +21,51 @@
 		<div class="reveal">
 			<div class="slides">
 
+				<section class = "box">
+					<div class = "title">
+					  <span class = "title weight">Segregated Witnesses</span>
+					</div>
+					<div class = "multi_text_box_container" style = "padding: 40px 0 0 0; width: 1270px;">
+					<div class = "text_box math_normal"
+						 style = "width: 45%; font-size: 27px; margin: 60px 0px 0px 30px">
+					  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+						<li>Literally: Separating the unlocking script (scriptSig)</li>
+						<li>An <em>output</em>-level concept, not transaction-level</li>
+						<li>A softfork!</li>
+						<li>BIPs 141, 143, 144, 145, 173</li>
+						<li>Activation drama: UASF BIP 148, activated in August 2017</li>
+						<li>Most important fix: transaction malleability</li>
+						<li>Other minor cleanups</li>
+						<li>Effective block size increase</li>
+						<li>New address format</li>
+						<li>New script versioning format \(\Rightarrow\) Taproot!</li>
+					  </ul>
+					</div>
+					<div class = "text_box math_normal"
+						 style = "width: 45%; font-size: 27px; margin: 60px 0px 0px 30px">
+						 <img src="images/blocksizewars.jpg" width=300>
+					</div>
+					</div>
+					</section>
+					<section class = "box">
+						<div class = "title">
+						  <span class = "title weight">Transaction Malleability</span>
+						</div>
+						<div class = "multi_text_box_container" style = "padding: 40px 0 0 0; width: 1270px;">
+						<div class = "text_box math_normal"
+							 style = "width: 80%; font-size: 27px; margin: 60px 0px 0px 30px">
+						  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+							<li>The possibility to change the TXID without altering its semantics</li>
+							<li>A show-stopper for L2-solutions like LN (why?)</li>
+							<li>How? Which part is inherently malleable without invalidating signatures?</li>
+							<div class="fragment">
+							<li>Signer: random \(k \Rightarrow\) practically infinite valid signatures</li>
+							<li><em>Everybody</em>: \((r, s) \Rightarrow (r, n-s)\)</li>
+							<ul><li>Mt. Gox hack</li></ul></div>
+						  </ul>
+						</div>
+						</div>
+						</section>
 			<!-- *********** BEGIN: P2WPKH *********** -->
 			<section class = "box">
 				<div class = "title">
@@ -48,6 +93,7 @@
                 <li>OP_0 pushes empty array to stack.</li>
 								<li>Signals Version 0 witness script.</li>
 							</ul>
+							<li style = "font-weight: bold;">Followed by a 20-byte hash value</li>
 							<hr style = "height:2px; visibility:hidden;">
 
 							<li style = "font-weight: bold;">Spending TX input script is empty, endorsement is placed in witness</li>
@@ -55,6 +101,7 @@
                 <li>Output is spendable by endorsement from private key of 20-Byte public key hash, equivalent to pay-to-public-key-hash output.</li>
 								<li>Witness is an off-script/off-stack transaction element which is assessed during transaction verification.</li>
 							</ul>
+							<li style = "font-weight: bold;">How do unupgraded nodes interpret this output?</li>
 							<hr style = "height:2px; visibility:hidden;">
 
 						</ul>
@@ -126,11 +173,6 @@
 					<!-- 60% div for formula and curve-->
 					<div class = "" style = "width: 58%; font-size: 22px;">
 						<img src="images/transaction_witness/bip143_sighash0.svg" class = "image" style = "z-index: -3;">
-						<img src="images/transaction_witness/bip143_sighash1.svg" class = "fragment image" style = "z-index: -3;">
-						<img src="images/transaction_witness/bip143_sighash2.svg" class = "fragment image" style = "z-index: -3;">
-						<img src="images/transaction_witness/bip143_sighash3.svg" class = "fragment image" style = "z-index: -3;">
-						<img src="images/transaction_witness/bip143_sighash4.svg" class = "fragment image" style = "z-index: -3;">
-						<img src="images/transaction_witness/bip143_sighash5.svg" class = "fragment image" style = "z-index: -3;">
 
 					</div>
 					<!-- 45% text & bulletpoint -->
@@ -189,6 +231,7 @@
 								<li>OP_0 pushes empty array to stack.</li>
 								<li>Signals Version 0 witness script.</li>
 							</ul>
+							<li style = "font-weight: bold;">Followed by a 32-byte hash value</li>
 							<hr style = "height:2px; visibility:hidden;">
 
 							<li style = "font-weight: bold;">Output is spendable by Embedded Script together and its Unlocking Script</li>
@@ -265,10 +308,65 @@
 			</section>
 			<!-- *********** BEGIN: P2WSH Run*********** -->
 
+			<section class = "box">
+				<div class = "title">
+				  <span class = "title weight">Native SegWit Addresses</span>
+				</div>
+				<div class = "multi_text_box_container" style = "padding: 40px 0 0 0; width: 1270px;">
+				<div class = "text_box math_normal"
+					 style = "width: 80%; font-size: 27px; margin: 60px 0px 0px 30px">
+				  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+					<li>bech32 addresses</li>
+					<ul>
+					<li>BCH error detection: can also correct some errors</li>
+					<li>32 lower-case characters alphabet</li>
+					</ul>
+					<li>P2WPKH: bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4</li>
+					<li>P2WSH: bc1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3qccfmv3</li>
+					<li>Address parts</li>
+					<ul>
+						<li>Human-readable part: bc / tb</li>
+						<li>separator: 1</li>
+						<li>data with six checksum chars (no "1", "b", "i", "o")</li>
+					</ul>
+				  </ul>
+				</div>
+				</div>
+				</section>
+
+			<section class = "box">
+				<div class = "title">
+				  <span class = "title weight">Step-wise SegWit onboarding</span>
+				</div>
+				<div class = "multi_text_box_container" style = "padding: 40px 0 0 0; width: 1270px;">
+				<div class = "text_box math_normal"
+					 style = "width: 80%; font-size: 27px; margin: 60px 0px 0px 30px">
+				  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+					<li>Sender and receiver SegWit support?</li>
+					<ul>
+						<li>Both: use it</li>
+						<li>None: don't use it</li>
+						<li>Sender only: Addresses</li>
+						<li>Receiver only: ?</li>
+						<ul>
+							<div class="fragment"><li>P2SH! "Wrapped SegWit"</li>
+								<ul>
+							<li>P2SH(P2WPKH)</li>
+							<li>P2SH(P2WSH)</li>
+						</ul>
+						<li>Pre-BIP16 vs. Pre-Segwit vs. Post-Segwit nodes</li>
+						</div>
+
+						</ul>
+					</ul>
+				  </ul>
+				</div>
+				</div>
+				</section>
 			<!-- *********** BEGIN: P2SH_P2WPKH  *********** -->
 			<section class = "box">
 				<div class = "title">
-					<span class = "title weight">P2SH(P2WSH)</span> Transaction
+					<span class = "title weight">P2SH(P2WPKH)</span> Transaction
 				</div>
 
 			<!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
@@ -443,6 +541,57 @@
 				</div><!-- End of 2 column container -->
 
 			</section>
+			<section class = "box">
+				<div class = "title">
+				  <span class = "title weight">Effective block size increase</span>
+				</div>
+				<div class = "multi_text_box_container" style = "padding: 40px 0 0 0; width: 1270px;">
+				<div class = "text_box math_normal"
+					 style = "width: 45%; font-size: 27px; margin: 60px 0px 0px 30px">
+				  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+						<li>What was Bitcoin's blocksize limit at inception?</li>
+						<ul>
+						<div class="fragment">
+							<li>\(\infty\)</li>
+							<li>2010: 1M bytes</li>
+						</div>
+					</ul>
+					<li>Segregating witness data allowed for a softfork block size increase</li>
+					<ul>
+						<li>Max. 4M WU</li>
+						<li>1 byte of non-SegWit data: 4WU</li>
+						<li>1 byte of SegWit data: 1WU</li>
+					</ul>
+					\(4(1-r)T+rT\leq 4\times 10^6\)
+					\(\Rightarrow T\leq \frac{4\times 10^6}{4-3r}\)
+				  </ul>
+				</div>
+				<div class = "text_box math_normal"
+					 style = "width: 45%; font-size: 27px; margin: 60px 0px 0px 30px">
+					 <img src="images/segwitblocksize.png" width=550>
+				</div>
+				</div>
+				</section>
+			<section class = "box">
+				<div class = "title">
+				  <span class = "title weight">Other improvements</span>
+				</div>
+				<div class = "multi_text_box_container" style = "padding: 40px 0 0 0; width: 1270px;">
+				<div class = "text_box math_normal"
+					 style = "width: 80%; font-size: 27px; margin: 60px 0px 0px 30px">
+				  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+					<li>Smarter hashing</li>
+					<ul>
+					<li>Data hashing grew with \(\mathcal{O}(n^2)\) in the number of SIGOPS</li>
+					<li>New digest allows for intermediate state to be reused (BIP 143)</li>
+					</ul>
+					<li>Output value uf UTXO being spent is committed to</li>
+					<ul><li>Important for Harware wallets</li></ul>
+					<li>Script versioning scheme: Taproot is v1 Segwit (OP_1)</li>
+				  </ul>
+				</div>
+				</div>
+				</section>
 			<!-- *********** END: P2SH_P2WSH run *********** -->
 
 

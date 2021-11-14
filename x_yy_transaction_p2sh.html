@@ -21,6 +21,28 @@
 		<div class="reveal">
 			<div class="slides">
 
+				<section class = "box">
+					<div class = "title">
+					  <span class = "title weight">Problems with complex output scripts</span>
+					</div>
+					<div class = "multi_text_box_container" style = "padding: 40px 0 0 0; width: 1270px;">
+					<div class = "text_box math_normal"
+						 style = "width: 80%; font-size: 27px; margin: 60px 0px 0px 30px">
+					  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+						<li>Bare multisig has ong locking script, with many variable parts (pubkeys)</li>
+						<ul>
+						<li>UTXO set bloat</li>
+						</ul>
+						<li>Sender shouldn't have to know about receiver's spending conditions</li>
+						<li>Sender shouldn't need to pay fees for complex spending conditions</li>
+						<li>Privacy</li>
+						<li>Standardness</li>
+						<li>Solution: Pay to an undisclosed script: Pay-to-script-hash</li>
+						<li>BIP 16 (2012) to much controversy</li>
+					  </ul>
+					</div>
+					</div>
+					</section>
 			<!-- *********** BEGIN: P2WPKH *********** -->
 			<section class = "box">
 				<div class = "title">
@@ -109,6 +131,34 @@
 			</section>
 			<!-- *********** END: P2WPKH *********** -->
 
+
+			<section class = "box">
+				<div class = "title">
+				  <span class = "title weight">P2SH addresses</span>
+				</div>
+				<div class = "multi_text_box_container" style = "padding: 40px 0 0 0; width: 1270px;">
+				<div class = "text_box math_normal"
+					 style = "width: 80%; font-size: 27px; margin: 60px 0px 0px 30px">
+				  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+					<li>base58-encode: <span class="inline_code">[1-byte version][20-byte hash][4-byte checksum]</span></li>
+					<li>Version prefix (Mainnet/Testnet)</li>
+					<ul>
+					  <li>0x05/0xC4</li>
+					</ul>
+					<ul>
+						<li>3N5i3Vs9UMyjYbBCFNQqU3ybSuDepX7oT3</li>
+						<li>2MzQwSSnBHWHqSAqtTVQ6v47XtaisrJa1Vc</li>
+					</ul>
+					<ul>
+				  </ul>
+				</ul>
+				<p></p>
+				<ul>
+				<li class="fragment">btw: P2SH-inside-P2SH is forbidden :)</li>
+			  </ul>
+				</div>
+				</div>
+				</section>
 
 
       </div><!-- END: Slides Div -->

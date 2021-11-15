@@ -36,7 +36,6 @@
           <div class = "text_box math_normal"
                style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
             <ul class = "math_normal" style = "margin: 20; padding: 0px;">
-              <li>High-level goals: requires private key to construct, only public key to verify</li>
               <li>Private key is the discrete log of the public key</li>
               <li>Signature verification: Does some equation hold?</li>
               <ul>
@@ -48,6 +47,34 @@
             </ul>
           </div>
           </section>
+          <section class = "box">
+            <div class = "title">
+              Intermezzo: <span class = "title weight">Hash functions</span>
+            </div>
+            <div class = "text_box math_normal"
+                 style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
+              <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+                <li>\(H\): Deterministically maps arbitrary-length input to \(n\)-bit output</li>
+                <li>Empirically:</li>
+                <ul>
+                  <li><span class="inline_code">RIPEMD160</span>("satoshi") = <span class="inline_code">3167ab2d46ca8d5f8bca5a5411acc3c8fb481f69</span></li>
+                  <li><span class="inline_code">RIPEMD160</span>("Satoshi") = <span class="inline_code">2911fe64c876962d4461cb529a0b7d61c5afe71c</span></li>
+                </ul>
+                <li>Hash function security</li>
+                <ul>
+                  <li>Collision-resistance: Find \(x_1, x_2: H(x_1)=H(x_2)\)</li>
+                  <li>Pre-image resistance: Find \(x_1: H(x_1) = h_1\)</li>
+                </ul>
+                <li>Security level: Bounded at \(2^{n/2}\) by generic birthday attack</li>
+                <li>In Bitcoin: <span class="inline_code">SHA256</span>, <span class="inline_code">RIPEMD160</span></li>
+                <li>\(\text{hash256}(x) = \text{SHA256}(\text{SHA256}(x))\)</li>
+                <ul>
+                  <li>dubious reasoning</li>
+                </ul>
+              </ul>
+                
+            </div>
+            </section>
    <section class = "box">
     <div class = "title">
       Motivating Schnorr:<span class = "title weight"> ZKP of a discrete log</span>
@@ -301,21 +328,24 @@
 
         <section class = "box">
           <div class = "title">
-            <span class = "title weight">Other Schnorr goodies</span>
+            <span class = "title weight">Other Schnorr benefits</span>
           </div>
           <div class = "text_box math_normal"
                style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
             <ul class = "math_normal" style = "margin: 20; padding: 0px;">
-              <li>Smaller and simpler fixed-length 64-byte encoding</li>
+              <li>Security proofs rely on weaker assumptions</li>
+              <li>Signature linearity!</li>
               <ul>
-                <li>Implicity even y-coordinate public keys only (every public key has two private keys)</li>
+                <li>
+                  \(\sum s_iG = \sum R_i +e_iP_i\)
+                </li>
               </ul>
-              <li>The fact that the signature is an EC point let's us do fancy things on it</li>
+              <li>Signature is an EC point: fancy math ensues</li>
               <ul>
               <li>Batch verification</li>
               <li>Adaptor sigantures</li>
+              <li><a class="orange_link" href="https://github.com/jonasnick/taproot-ringsig/" target="_blank">1-of-N ownership proofs</a></li>
             </ul>
-            <li>Bonus exercise: Private key leak through nonce reuse</li>
             </ul>
           </div>
           </section>

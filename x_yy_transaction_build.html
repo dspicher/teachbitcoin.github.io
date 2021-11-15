@@ -136,6 +136,55 @@
 
 			</section>
 			<!-- *********** END: Transaction Verification *********** -->
+        <section class = "box">
+			<div class = "title">
+			  <span class = "title weight">Script</span>
+			</div>
+			<div class = "text_box math_normal"
+				 style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
+			  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+				<li>Simple data structure: Stack. No loops: DoS protection</li>
+				<ul>
+					<li>Push data to the stack: <span class="inline_code">0x47</span> <span class="inline_code">[71-byte-pubkey]</span></li>
+					<li>Manipulate stack: <span class="inline_code">OP_DROP</span>, <span class="inline_code">OP_DUP</span></li>
+					<li>Initiate flow control: <span class="inline_code">OP_IF</span></li>
+					<li>Do arithmetic: <span class="inline_code">OP_ADD</span></li>
+					<li>Crypto: <span class="inline_code">OP_HASH160</span>, <span class="inline_code">OP_CHECKSIG</span></li>
+					<li>Check timelocks: <span class="inline_code">OP_CHECKLOCKTIMEVERIFY</span>, <span class="inline_code">OP_CHECKSEQUENCEVERIFY</span></li>
+				</ul>
+				<li>Script verification</li>
+				<ul>
+				  <li>
+					Run input script ("scriptSig")
+				  </li>
+				  <li>
+					Copy stack
+				  </li>
+				  <li>
+					Run output script ("scriptPubKey")
+				  </li>
+				  <li>Success == non-zero top-item</li>
+				</ul>
+			  </ul>
+			</div>
+			</section>
+			<section class = "box">
+				<div class = "title">
+				  <span class = "title weight">Some Script examples</span>
+				</div>
+				<div class = "text_box math_normal"
+					 style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
+				  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+					<li>Satisfy the output script <span class="inline_code">3 OP_ADD 5 OP_EQUAL</span></li>
+					<li class="fragment">Control flow: Satisfy the output script <p><span class="inline_code">OP_IF 1 2 OP_EQUALVERIFY OP_ELSE 1 OP_EQUALVERIFY OP_ENDIF</span></li>
+					<li class="fragment">What does this script do? <p><span class="inline_code">OP_2DUP OP_EQUAL OP_NOT OP_VERIFY OP_SHA1 OP_SWAP OP_SHA1 OP_EQUAL</span></li>
+					<ul class="fragment">
+						<li>SHA-1 collision prize was claimed in <a class ="orange_link" target="_blank" href="https://blockstream.info/tx/8d31992805518fd62daa3bdd2a5c4fd2cd3054c9b3dca1d78055e9528cff6adc">2017</a></li>
+						<li><a class="orange_link" target="_blank" href="https://bitcointalk.org/index.php?topic=293382.0">Others still open</a></li>
+					</ul>
+				  </ul>
+				</div>
+				</section>
 
       <!-- *********** BEGIN: P2PKH Script Introduction *********** -->
       <section class = "box">
@@ -343,6 +392,26 @@
         </div><!-- End of 2 column container -->
 
       </section>
+	  <section class = "box">
+		  <div class = "title">
+			<span class = "title weight">Bitcoin addresses</span>
+		  </div>
+		  <div class = "text_box math_normal"
+			   style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
+			<ul class = "math_normal" style = "margin: 20; padding: 0px;">
+			  <li>Payee communicates to payer how the funds should be locked up</li>
+			  <li>Address communicates output script template and output script variables</li>
+			  <li>P2PKH addresses: <span class="inline_code">1PMycacnJaSqwwJqjawXBErnLsZ7RkXUAs</span> contains a 20-byte pubkey hash</li>
+			  <li><span class="inline_code">[version-byte] [20-byte hash] [4-byte checksum]</span> base58-encoded</li>
+			  <li class="fragment">Control flow: Satisfy the output script <p><span class="inline_code">OP_IF 1 2 OP_EQUALVERIFY OP_ELSE 1 OP_EQUALVERIFY OP_ENDIF</span></li>
+			  <li class="fragment">What does this script do? <p><span class="inline_code">OP_2DUP OP_EQUAL OP_NOT OP_VERIFY OP_SHA1 OP_SWAP OP_SHA1 OP_EQUAL</span></li>
+			  <ul class="fragment">
+				  <li>SHA-1 collision prize was claimed in <a class ="orange_link" target="_blank" href="https://blockstream.info/tx/8d31992805518fd62daa3bdd2a5c4fd2cd3054c9b3dca1d78055e9528cff6adc">2017</a></li>
+				  <li><a class="orange_link" target="_blank" href="https://bitcointalk.org/index.php?topic=293382.0">Others still open</a></li>
+			  </ul>
+			</ul>
+		  </div>
+		  </section>
       <!-- *********** END: Creating an Endorsement *********** -->
 
 

@@ -64,66 +64,6 @@
         </div><!-- End of 2 column container -->
 
       </section>
-      <!-- *********** END: Bitcoin P2PKH Derivation Paths *********** -->
-
-      <!-- *********** BEGIN: Bitcoin P2PKH Address *********** -->
-
-      <section class = "box">
-        <div class = "title">
-          Public Key to <span class = "title weight">P2PKH Address</span>
-        </div>
-
-        <!-- Derivation Graphic -->
-        <img src="images/wallets/p2pkh_address0.svg" class = "image" style = "z-index: -1;">
-				<img src="images/wallets/p2pkh_address1.svg" class = "fragment image" style = "z-index: -1;">
-				<img src="images/wallets/p2pkh_address2.svg" class = "fragment image" style = "z-index: -1;">
-				<img src="images/wallets/p2pkh_address3.svg" class = "fragment image" style = "z-index: -1;">
-
-        <!-- 2 column container -->
-        <!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
-        <div class = "multi_text_box_container" style = "padding: 0px 0 0 0; width: 1270px;">
-          <!-- 45% div for formula and curve-->
-          <div class = "" style = "width: 45%; font-size: 27px;">
-          </div>
-          <!-- 45% text & bulletpoint -->
-          <div class = "text_box"
-               style = "width: 36%; font-size: 22px; margin: 40px 0 0 0">
-            <ul style = "margin: 0; padding: 0px; list-style-type: none;">
-              <li style = "font-weight: bold;">Bitcoin Short Hash</li>
-              <div class="">
-                <ul>
-									<li><span class="inline_code">RIPEMD160(SHA256(public key))</span></li>
-                  <li>Compressed or uncompressed public key point.</li>
-                </ul>
-                <hr style = "height:3px; visibility:hidden;">
-              </div>
-              <div class = "">
-                <li style = "font-weight: bold;">Bitcoin Hash Checksum</li>
-                <ul>
-									<li><span class="inline_code">double SHA256(input)<span></li>
-									<li>First 4 bytes of digest.</li>
-                  <li>Version prefix (Mainnet/Testnet)</li>
-                  <ul>
-                    <li>0x00/0x6F</li>
-                  </ul>
-                </ul>
-                <hr style = "height:3px; visibility:hidden;">
-              </div>
-              <li style = "font-weight: bold;">Base58 Encoding</li>
-                <ul>
-                  <li>Bitcoin Address:</li>
-                  <ul>
-                    <li>Mainnet: begins with 1</li>
-                    <li>Testnet: begins with m or n</li>
-                  </ul>
-                </ul>
-							<hr style = "height:3px; visibility:hidden;">
-            </ul>
-          </div>
-
-        </div><!-- End of 2 column container -->
-
-      </section>
       <!-- *********** END: Bitcoin P2PKH Address *********** -->
 
       <!-- *********** BEGIN: Bitcoin Private Key WIF format *********** -->

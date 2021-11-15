@@ -392,26 +392,67 @@
         </div><!-- End of 2 column container -->
 
       </section>
-	  <section class = "box">
-		  <div class = "title">
-			<span class = "title weight">Bitcoin addresses</span>
-		  </div>
-		  <div class = "text_box math_normal"
-			   style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
-			<ul class = "math_normal" style = "margin: 20; padding: 0px;">
-			  <li>Payee communicates to payer how the funds should be locked up</li>
-			  <li>Address communicates output script template and output script variables</li>
-			  <li>P2PKH addresses: <span class="inline_code">1PMycacnJaSqwwJqjawXBErnLsZ7RkXUAs</span> contains a 20-byte pubkey hash</li>
-			  <li><span class="inline_code">[version-byte] [20-byte hash] [4-byte checksum]</span> base58-encoded</li>
-			  <li class="fragment">Control flow: Satisfy the output script <p><span class="inline_code">OP_IF 1 2 OP_EQUALVERIFY OP_ELSE 1 OP_EQUALVERIFY OP_ENDIF</span></li>
-			  <li class="fragment">What does this script do? <p><span class="inline_code">OP_2DUP OP_EQUAL OP_NOT OP_VERIFY OP_SHA1 OP_SWAP OP_SHA1 OP_EQUAL</span></li>
-			  <ul class="fragment">
-				  <li>SHA-1 collision prize was claimed in <a class ="orange_link" target="_blank" href="https://blockstream.info/tx/8d31992805518fd62daa3bdd2a5c4fd2cd3054c9b3dca1d78055e9528cff6adc">2017</a></li>
-				  <li><a class="orange_link" target="_blank" href="https://bitcointalk.org/index.php?topic=293382.0">Others still open</a></li>
-			  </ul>
-			</ul>
-		  </div>
-		  </section>
+  
+      <!-- *********** END: Bitcoin P2PKH Derivation Paths *********** -->
+
+      <!-- *********** BEGIN: Bitcoin P2PKH Address *********** -->
+
+      <section class = "box">
+        <div class = "title">
+          Public Key to <span class = "title weight">P2PKH Address</span>
+        </div>
+
+        <!-- Derivation Graphic -->
+        <img src="images/wallets/p2pkh_address0.svg" class = "image" style = "z-index: -1;">
+				<img src="images/wallets/p2pkh_address1.svg" class = "fragment image" style = "z-index: -1;">
+				<img src="images/wallets/p2pkh_address2.svg" class = "fragment image" style = "z-index: -1;">
+				<img src="images/wallets/p2pkh_address3.svg" class = "fragment image" style = "z-index: -1;">
+
+        <!-- 2 column container -->
+        <!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+        <div class = "multi_text_box_container" style = "padding: 0px 0 0 0; width: 1270px;">
+          <!-- 45% div for formula and curve-->
+          <div class = "" style = "width: 45%; font-size: 27px;">
+          </div>
+          <!-- 45% text & bulletpoint -->
+          <div class = "text_box"
+               style = "width: 36%; font-size: 22px; margin: 40px 0 0 0">
+            <ul style = "margin: 0; padding: 0px; list-style-type: none;">
+              <li style = "font-weight: bold;">Bitcoin Short Hash</li>
+              <div class="">
+                <ul>
+									<li><span class="inline_code">RIPEMD160(SHA256(public key))</span></li>
+                  <li>Compressed or uncompressed public key point.</li>
+                </ul>
+                <hr style = "height:3px; visibility:hidden;">
+              </div>
+              <div class = "">
+                <li style = "font-weight: bold;">Bitcoin Hash Checksum</li>
+                <ul>
+									<li><span class="inline_code">double SHA256(input)<span></li>
+									<li>First 4 bytes of digest.</li>
+                  <li>Version prefix (Mainnet/Testnet)</li>
+                  <ul>
+                    <li>0x00/0x6F</li>
+                  </ul>
+                </ul>
+                <hr style = "height:3px; visibility:hidden;">
+              </div>
+              <li style = "font-weight: bold;">Base58 Encoding</li>
+                <ul>
+                  <li>Bitcoin Address:</li>
+                  <ul>
+                    <li>Mainnet: begins with 1</li>
+                    <li>Testnet: begins with m or n</li>
+                  </ul>
+                </ul>
+							<hr style = "height:3px; visibility:hidden;">
+            </ul>
+          </div>
+
+        </div><!-- End of 2 column container -->
+
+      </section>
       <!-- *********** END: Creating an Endorsement *********** -->
 
 

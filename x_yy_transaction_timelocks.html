@@ -47,12 +47,14 @@
 							<li style = "font-weight: bold;">TX Locktime Field</li>
 							<ul style = "list-style-type: circle;">
                 <li>Describes the absolute time in unix time or blockheight, from when on the transaction is valid.</li>
+				<li>Present from the beginning.</li>
 							</ul>
 							<hr style = "height:2px; visibility:hidden;">
 
 							<li style = "font-weight: bold;">OP_CHECKLOCKTIMEVERIFY</li>
 							<ul style = "list-style-type: circle;">
                 <li>An output script operator, which describes what locktime the spending transaction must have.</li>
+				<li>BIP-65 softfork activated in 2015</li>
 							</ul>
 							<hr style = "height:2px; visibility:hidden;">
 
@@ -174,12 +176,14 @@
 							<li style = "font-weight: bold;">TX Input Sequence Field</li>
 							<ul style = "list-style-type: circle;">
                 <li>Describes the relative delay time in unix time or blocks, from which on a timelocked transaction is valid.</li>
+				<li>BIP-68 softfork activated in 2016</li>
 							</ul>
 							<hr style = "height:2px; visibility:hidden;">
 
 							<li style = "font-weight: bold;">OP_CHECKSEQUENCEVERIFY</li>
 							<ul style = "list-style-type: circle;">
                 <li>An output script operator, which describes what relative locktime the spending transaction input must have.</li>
+				<li>BIP-112 softfork activated in 2016</li>
 							</ul>
 							<hr style = "height:2px; visibility:hidden;">
 
@@ -277,6 +281,26 @@
 				</div><!-- End of 2 column container -->
 
 			</section>
+			<section class = "box">
+				<div class = "title">
+				  <span class = "title weight">Median time past</span>
+				</div>
+				<div class = "multi_text_box_container" style = "padding: 40px 0 0 0; width: 1270px;">
+				<div class = "text_box math_normal"
+					 style = "width: 80%; font-size: 27px; margin: 60px 0px 0px 30px">
+				  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+					<li>Synchronizing time in a distributed system :(</li>
+					<li>No way to reach consensus on timetsamp in block header</li>
+					<li>BIP 113 activated together with relative timelock BIPs</li>
+					<ul>
+					<li>MTP = Median of last 11 block timestamps</li>
+					<li>Used to evaluate timelocks (lags approx. 1 hour)</li>
+					<li>Increases monotonically</li>
+					</ul>
+				  </ul>
+				</div>
+				</div>
+				</section>
 			<!-- *********** END: CSV *********** -->
 
 

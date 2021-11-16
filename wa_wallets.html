@@ -29,41 +29,35 @@
 
 			<!-- *********** BEGIN: Bitcoin P2PKH Derivation Paths *********** -->
 
+
       <section class = "box">
         <div class = "title">
-          Single Secret -  <span class = "title weight">Multiple Addresses</span>
+          <span class = "title weight">Wallets</span>
         </div>
-
-        <!-- Derivation Graphic -->
-        <img src="images/wallets/p2pkh_address_derivation.svg" class = "image" style = "z-index: -1;">
-
-        <!-- 2 column container -->
-        <!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
-        <div class = "multi_text_box_container" style = "padding: 0px 0 0 0; width: 1270px;">
-          <!-- 45% div for formula and curve-->
-          <div class = "" style = "width: 45%; font-size: 27px;">
-          </div>
-          <!-- 45% text & bulletpoint -->
-          <div class = "text_box"
-               style = "width: 36%; font-size: 22px; margin: 80px 0 0 0">
-            <ul style = "margin: 0; padding: 0px; list-style-type: none;">
-              <li style = "font-weight: bold;">P2PKH Address Derivation</li>
-              <ul class="">
-
-								<li>Separate P2PKH addresses can be derived from uncompressed or
-									compressed public keys.</li>
-								<hr style = "height:3px; visibility:hidden;">
-								<li>Mainnet and testnet addresses can be
-								derived from an uncompressed or compressed public keys.</li>
-								<hr style = "height:3px; visibility:hidden;">
-								<li>A single secret private key can spend from all addresses derived from it.</li>
-              </ul>
+        <div class = "text_box math_normal"
+             style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
+          <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+            <li>A collection of private keys</li>
+            <li>Bitcoin Core: Independently randomly drawn</li>
+            <ul>
+              <li>Backup problems</li>
             </ul>
-          </div>
-
-        </div><!-- End of 2 column container -->
-
-      </section>
+            <li>BIP 39</li>
+            <ul>
+              <li>
+                How to backup initial entropy, and how to derive a 512-bit seed from it
+              </li>
+            </ul>
+            <li>BIP 32</li>
+            <ul>
+              <li>
+                How to generate unlimited private keys from the seed
+              </li>
+            </ul>
+          </ul>
+          </ul>
+        </div>
+        </section>
       <!-- *********** END: Bitcoin P2PKH Address *********** -->
 
       <!-- *********** BEGIN: Bitcoin Private Key WIF format *********** -->
@@ -694,6 +688,46 @@
       </section>
 			<!-- *********** END: Restoring HD Wallets *********** -->
 
+
+      <section class = "box">
+        <div class = "title">
+          <span class = "title weight">Beyond BIP44 & P2PKH</span>
+        </div>
+        <div class = "text_box math_normal"
+             style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
+          <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+            <li>BIP 49 introduced yprv/ypub</li>
+            <ul>
+              <li>m / 49' / ...</li>
+              <li>Wallets construct P2SH-P2WPKH outputs</li>
+            </ul>
+            <li>BIP 84 introduced zprv/zpub</li>
+            <ul>
+              <li>m / 84' / ...</li>
+              <li>Wallets construct P2WPKH outputs</li>
+            </ul>
+            <div class = "fragment">
+            <li>not scalable</li>
+          </div>
+          <div class = "fragment">
+            <li>\(\Rightarrow\) <a href="https://github.com/bitcoin/bitcoin/blob/master/doc/descriptors.md">Output descriptors</a></li>
+            <ul>
+              <li>
+                sh(wpkh(03fff97bd5755eeea420453a14355235d382f6472f8568a18b2f057a1460297556))
+              </li>
+              <li>
+                pkh(xpub68G...GDnw/1/2)
+              </li>
+              <li>
+                wsh(multi(1,xpub661...uduB/1/0/*,xpub69H...QTPH/0/0/*))
+              </li>
+              <li>https://github.com/bitcoin/bitcoin/blob/master/doc/descriptors.md</li>
+            </ul>
+          </div>
+          </ul>
+          </ul>
+        </div>
+        </section>
 
 
       </div><!-- END: Slides Div -->

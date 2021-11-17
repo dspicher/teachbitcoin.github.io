@@ -45,14 +45,14 @@
 
 							<li style = "font-weight: bold;">Basic Bitcoin Transaction Structure:</li>
 							<ul style = "list-style-type: circle;">
-								<li>[version] [inputs] [outputs] [locktime]</li>
+								<li>S=[version] [inputs] [outputs] [locktime]</li>
+								<li>TXID=sha256(sha256((S)) (little-endian)</li>
 
 							</ul>
 							<hr style = "height:2px; visibility:hidden;">
 							<li style = "font-weight: bold;">1) Version Field</li>
 							<ul style = "list-style-type: circle;">
-                <li>Mostly unused, any value can be applied</li>
-								<li>Historically, default value of 1</li>
+                <li>Mostly unused, any value can be applied (historically, default=1)</li>
 								<li>For relative timelocks, must be set to >= 2</li>
 							</ul>
 							<hr style = "height:2px; visibility:hidden;">

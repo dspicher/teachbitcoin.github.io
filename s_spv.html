@@ -24,11 +24,7 @@
             <span class = "weight">SPV Header Chain Validation</span>
           </div>
 
-          <img src="images/bitcoinedge_tokyo/spv_header_chain0.svg" class = "image" style = "z-index: -3;">
-          <img src="images/bitcoinedge_tokyo/spv_header_chain1.svg" class = "fragment image" style = "z-index: -3;">
-          <img src="images/bitcoinedge_tokyo/spv_header_chain2.svg" class = "fragment image" style = "z-index: -3;">
-          <img src="images/bitcoinedge_tokyo/spv_header_chain3.svg" class = "fragment image" style = "z-index: -3;">
-          <img src="images/bitcoinedge_tokyo/spv_header_chain4.svg" class = "fragment image" style = "z-index: -3;">
+          <img src="images/bitcoinedge_tokyo/spv_header_chain4.svg" class = "image" style = "z-index: -3;">
 
         </section>
         <!-- *********** END: SPV header chain *********** -->
@@ -53,6 +49,39 @@
           <img src="images/bitcoinedge_tokyo/spv_merkle_proof.svg" class = "image" style = "z-index: -3;">
 
         </section>
+
+
+        <section class = "box">
+			<div class = "title">
+			  <span class = "title weight">SPV tx fetching</span> strategies
+			</div>
+			<div class = "text_box math_normal"
+				 style = "width: 90%; font-size: 27px; margin: 60px 0px 0px 30px">
+			  <ul class = "math_normal" style = "margin: 20; padding: 0px;">
+				<li>Naïve scriptPubKey subscription is terrible for privacy</li>
+				<li>BIP37 used Bloom filters to ensure a superset would be returned</li>
+				<ul>
+					<li>
+						Multiple privacy leaks, almost unused today
+					</li>
+				</ul>
+				<li>Neutrino BIP157/158: a single compact filter per block (Golomb-Rice coding)</li>
+				<ul>
+					<li>
+						vastly improved privacy: could be any tx from the block
+					</li>
+					<li>
+						very cheap on server-side: same filter for every SPV client
+					</li>
+				</ul>
+				<li>Factually the most-used SPV protocol:</li>
+				<ul>
+				<li>Electrum: Hash(scriptPubKey) subscription</li>
+				<li>Private until output appears</li>
+			  </ul>
+			  </ul>
+			</div>
+			</section>
         <!-- *********** END: SPV merkle proof *********** -->
 
 

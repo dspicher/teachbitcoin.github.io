@@ -195,8 +195,8 @@
 
                 <li style = "font-weight: bold;">Hashes required to achieve target:</li>
                 <ul>
-                  <li>Example: <span class="inline_code">0x0800...00:</span> Every 2nd Hash...</li>
-                  <li>Example: <span class="inline_code">0x0400...00:</span> Every 4th Hash...</li>
+                  <li>Example: <span class="inline_code">0x800...00:</span> Every 2nd Hash...</li>
+                  <li>Example: <span class="inline_code">0x400...00:</span> Every 4th Hash...</li>
                 </ul>
                 <hr style = "height: 5px; visibility: hidden;">
               </ul>
@@ -250,7 +250,65 @@
 
         </section>
         <!-- *********** END: Retargeting *********** -->
+        <section class = "box">
+          <div class = "title">
+            Block interval <span class = "title weight">distribution</span>
+          </div>
 
+          <!-- 2 column container -->
+          <!-- 45% div for formula and curve--><!-- 45% text & bulletpoint -->
+          <div class = "multi_text_box_container" style = "padding: 0px 0 0 0; width: 1270px;">
+            <!-- 45% div for formula and curve-->
+
+            <!-- 45% text & bulletpoint -->
+            <div class = "text_box"
+                 style = "width: 90%; font-size: 22px; margin: 80px 0 0 0">
+              <ul style = "margin: 0; padding: 0px; list-style-type: none;">
+
+                <li style = "font-weight: bold;">Crucial fact:</li>
+                <ul>
+                  <li>Every small \(\Delta t\), there is a constant probability a block will be found</li>
+                  <li>Directly leads to exponential distribution</li>
+                  <ul>
+                    <li>
+                      Also known from: Radioactive decay, queueing theory
+                    </li>
+                  </ul>
+                </ul>
+                <hr style = "height: 5px; visibility: hidden;">
+
+                <li style = "font-weight: bold;">Some surprising facts:</li>
+                <ul>
+                  <li>What is the most likely block interval?</li>
+                  <ul>
+                    <li class="fragment">
+                      \(t \rightarrow 0\)
+                    </li>
+                  </ul>
+                  <li>What is the median block interval?</li>
+                  <ul>
+                    <li class="fragment">
+                      \(\ln(2)10\text{min}\approx 6.9\text{min}\)
+                    </li>
+                  </ul>
+                  <li>Given you have already waited 10 minutes, what is the expected remaining time?</li>
+                  <ul>
+                    <li class="fragment">
+                      10 minutes, "memoryless"
+                    </li>
+                  </ul>
+                  <li>What is the expected block interval you find yourself in right now?</li>
+                  <ul>
+                    <li class="fragment">
+                      20 minutes
+                    </li>
+                  </ul>
+                </ul>
+            </div>
+
+          </div><!-- End of 2 column container -->
+
+        </section>
         <!-- *********** Begin: Coinbase *********** -->
         <section class = "box">
           <div class = "title">
@@ -279,7 +337,7 @@
                   <li>V1: Arbitrary data.</li>
                   <li>Beginning V2: Commits to blockheight (BIP30).</li>
                   <ul>
-                    <li>Coinbase overwriting (identical txid).</li>
+                    <li>Solves coinbase overwriting (identical txid).</li>
                   </ul>
                   <li>Up to 100B total.</li>
                 </ul>
@@ -545,14 +603,14 @@
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-					// { src: 'plugin/math/math.js', async: true }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/math/math.js', async: true }
 				],
 
-				// math: {
-				// 	mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-				// 	config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-				// },
+				math: {
+					mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+				},
 
 				previewLinks: false,
 

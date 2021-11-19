@@ -266,16 +266,17 @@
                  style = "width: 90%; font-size: 22px; margin: 80px 0 0 0">
               <ul style = "margin: 0; padding: 0px; list-style-type: none;">
 
-                <li style = "font-weight: bold;">Crucial fact:</li>
+                <li style = "font-weight: bold;">Which distribution? Crucial fact:</li>
                 <ul>
                   <li>Every small \(\Delta t\), there is a constant probability a block will be found</li>
                   <div class="fragment">
-                  <li>Directly leads to exponential distribution</li>
+                  <li>Directly leads to exponential distribution: \(\Pr (t) \propto e^{-t/\text{600s}}\)</li>
                   <ul>
                     <li>
                       Also known from: Radioactive decay, queueing theory
                     </li>
                   </ul>
+                  <li class="fragment">\(\text{CDF(t)}=1-e^{-t/\text{600s}}\), \(\text{CDF(1hr)}=1-e^{-6}\approx 0.9975\)</li>
                 </div>
                 </ul>
                 <hr style = "height: 5px; visibility: hidden;">

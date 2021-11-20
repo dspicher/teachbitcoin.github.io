@@ -137,7 +137,7 @@
 						<div class = "text_box"
 								 style = "width: 40%; font-size: 24px; margin: 0px 0 0 0">
 							<ul style = "margin: 0; padding: 0px; list-style-type: none;">
-
+								<li style = "font-weight: bold;">Misnomer: not really revocable</li>
 								<li style = "font-weight: bold;">Spendable after time-out</li>
 								<ul style = "list-style-type: circle;">
 									<li>RSMC A is spendable by A after a delay</li>
@@ -146,10 +146,9 @@
 
 								<li style = "font-weight: bold;">Spendable by secret R</li>
 								<ul style = "list-style-type: circle;">
-									<li>Each party generates secret: <br><span class="inline_code">r1 & r2</span></li>
-									<li>Parties exchanges pubkeys: <br><span class="inline_code">R1 & R2</span></li>
-									<li>Public key R is derived indendently:<br><span class="inline_code">R = R1+R2 = r1&#8226;G + r2&#8226;G = (r1+r2)G</span></li>
-									<li>Public key R is spendable with:<br><span class="inline_code">r = r1 + r2</span></li>
+									<li>Public key R is derived as:<br><span class="inline_code">\(R=R_\text{loc}+R_\text{rem}=(r_\text{loc}+r_\text{rem})\text{G}\)</span></li>
+									<li>Public key R is spendable with:<br><span class="inline_code">\(r_\text{loc}, r_\text{rem}\)</span></li>
+									<li>\(r_\text{rem}\) is revealed by counterparty as revocation</li>
 								</ul>
 								<hr style = "height:5px; visibility:hidden;">
 
@@ -251,8 +250,7 @@
 
 								<li style = "font-weight: bold;">1) Alice wants to send a payment to Dave.</li>
 								<ul style = "list-style-type: circle;">
-									<li>Dave creates a unique <span class="inline_code">payment_preimage</span>.</li>
-									<li>Dave sends <span class="inline_code">HASH160(payment_preimage)</span><br>to Alice.</li>
+									<li>Dave sends <span class="inline_code">HASH160(payment_preimage)</span><br>to Alice, for a unique <span class="inline_code">payment_preimage</span></li>
 								</ul>
 								<hr style = "height:8px; visibility:hidden;">
 
@@ -264,13 +262,13 @@
 
 								<li style = "font-weight: bold;">3) Channels update commitment with <span class="inline_code">htlc</span>.</li>
 								<ul style = "list-style-type: circle;">
-									<li>Hash time locked contract represents<br>a "pending" amount.</li>
+									<li>Hash time locked contract represents<br>a "pending" amount/output. Should be reconciled back into new commitment transactions.</li>
 								</ul>
 								<hr style = "height:8px; visibility:hidden;">
 
 								<li style = "font-weight: bold;">4) Dave unlocks <span class="inline_code">htlc</span> with <span class="inline_code">payment_preimage</span>.</li>
 								<ul style = "list-style-type: circle;">
-									<li>Preimage is propgated backwards<br>through payment route.</li>
+									<li>Preimage is propgated backwards<br>through payment route: atomicity!</li>
 									<li><span class="inline_code">htlc</span>'s are settled and commitment tx is updated.</li>
 								</ul>
 								<hr style = "height:8px; visibility:hidden;">
@@ -370,17 +368,17 @@
 
 								<li style = "font-weight: bold;">HTLC(SENT) output spendable by:</li>
 								<ul style = "list-style-type: circle;">
-									<li>After HTLC timeout: Timeout TX</li>
-									<li>Payment preimage & HTLC receiver’s signature</li>
-									<li>Revocation signature & public key</li>
+									<li>Bob: After HTLC timeout: Presigned timeout TX</li>
+									<li>Charlie: Payment preimage & HTLC receiver’s signature</li>
+									<li>Charlie: Revocation signature & public key</li>
 								</ul>
 								<hr style = "height:8px; visibility:hidden;">
 
 								<li style = "font-weight: bold;">HTLC(RECV) output spendable by:</li>
 								<ul style = "list-style-type: circle;">
-									<li>Payment preimage & success TX</li>
-									<li>After HTLC timeout: HTLC sender’s signature</li>
-									<li>Revocation signature & public key</li>
+									<li>Charlie: Payment preimage & success TX</li>
+									<li>Bob: After HTLC timeout: HTLC sender’s signature</li>
+									<li>Bob: Revocation signature & public key</li>
 								</ul>
 								<hr style = "height:8px; visibility:hidden;">
 
